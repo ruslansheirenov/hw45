@@ -18,7 +18,14 @@ def task_create_view(request):
         title = request.POST.get('title')
         status = request.POST.get('status')
         description = request.POST.get('description')
-        new_task = Task.objects.create(title=title, status=status, description=description)
+        date_of_completion = request.POST.get('date_of_completion')
+        new_task = Task.objects.create(title=title, status=status, description=description, date_of_completion=date_of_completion)
         context = {'task': new_task}
 
         return render(request, 'task_view.html', context)
+
+def task_view(request):
+    task_id = request.GET.get('pk')
+    task = Task.objects.get(pk=task_id)
+    context = {'task': task}
+    return render(request, 'task_view.html', context)
