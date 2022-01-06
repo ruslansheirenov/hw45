@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create</title>
-</head>
-<body>
-<h1>Create Article</h1>
+{% extends 'base.html' %}
+{% block title %}Create Task{% endblock %}
+{% block nav %}{% endblock %}
+{% block content %}
+<h1>Create Task</h1>
 <form method="post">
     {% csrf_token %}
     <label>Title:</label><br/>
@@ -27,5 +24,4 @@
     <br/>
     <input type="submit" value="Send"/>
 </form>
-</body>
-</html>
+{% endblock %}

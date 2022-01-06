@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ task.title }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Task {{ task.pk }}{% endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url "create" %}">Create Task</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Edit Task</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Delete Task</a>
+    </li>
+{% endblock %}
+{% block content %}
     <h1>{{ task.title }}</h1>
     <h3>{{ task.status }}</h3>
     <p>{{ task.description }}</p>
     <p>{{ task.detailed_description }}</p>
     <p>{{ task.date_of_completion }}</p>
-
-    <a href="{% url "index" %}">Home Page</a>
-</body>
-</html>
+{% endblock %}
