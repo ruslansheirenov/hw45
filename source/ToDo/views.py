@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Task
 
@@ -22,12 +21,10 @@ def task_create_view(request):
         detailed_description = request.POST.get('detailed_description')
         date_of_completion = request.POST.get('date_of_completion')
         new_task = Task.objects.create(title=title, status=status, description=description, detailed_description=detailed_description, date_of_completion=date_of_completion)
-        context = {'task': new_task}
+        
+        return redirect("task_view", pk=new_task.pk)
 
-        return HttpResponseRedirect(f'/task/?pk={new_task.pk}')
-
-def task_view(request):
-    task_id = request.GET.get('pk')
-    task = Task.objects.get(pk=task_id)
+def task_view(request, pk):
+    task = get_object_or_404(Task, pk=pk)
     context = {'task': task}
     return render(request, 'task_view.html', context)
